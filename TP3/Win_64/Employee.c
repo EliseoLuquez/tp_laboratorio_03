@@ -16,8 +16,8 @@ Employee* employee_new()/**  **/
     emp = (Employee*)malloc(sizeof(Employee));
     emp->id = 0;
     strcpy(emp->nombre, "");
-    emp->horasTrabajadas = 0;
-    emp->sueldo = 0;
+    emp->horasTrabajadas;
+    emp->sueldo;
 
     return emp;
 }
@@ -103,6 +103,7 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 
     return ret;
 }
+
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int ret;
@@ -148,22 +149,90 @@ void  employee_showEmployee(Employee* this)
         printf ( " %4d  %s  %d  %d \n " , this->id , this->nombre , this->horasTrabajadas , this->sueldo);
     }
 }
-/**
-void  employee_showEmployees(Employee* this, int tam)
+
+void  employee_showEmployees(Employee* this)
 {
+    Employee* emp;
 
-    tam = ll_len(this);
-    for(int i=0; i<tam;i++)
+    if(this != NULL )
     {
-        if(this != NULL )
+        for(int i=0; i<ll_len(this);i++)
         {
-            employee_showEmployee(this);
+            emp = (Employee*)ll_get(this, i);
+            employee_showEmployee(emp);
         }
-        else
-        {
-            printf("No hay empleados cargados");
-        }
-
     }
+    else
+    {
+        printf("No hay empleados cargados");
+    }
+
 }
-**/
+
+int employee_sortByName(void* empleadoA, void* empleadoB)
+{
+    int ret;
+    ret = RETURN_ERROR;
+
+    Employee* empA;
+    Employee* empB;
+
+    if(empleadoA != NULL && empleadoB != NULL)
+    {
+        empA = (Employee*) empleadoA;
+        empB = (Employee*) empleadoB;
+        ret = strcmp(empA->nombre, empB->nombre);
+    }
+    return ret;
+}
+
+int employee_sortById(void* empleadoA, void* empleadoB)
+{
+    int ret;
+    ret = RETURN_ERROR;
+
+    Employee* empA;
+    Employee* empB;
+
+    if(empleadoA != NULL && empleadoB != NULL)
+    {
+        empA = (Employee*) empleadoA;
+        empB = (Employee*) empleadoB;
+        ret = empA->id, empB->id;
+    }
+    return ret;
+}
+
+int employee_sortByHsTrabajadas(void* empleadoA, void* empleadoB)
+{
+    int ret;
+    ret = RETURN_ERROR;
+
+    Employee* empA;
+    Employee* empB;
+
+    if(empleadoA != NULL && empleadoB != NULL)
+    {
+        empA = (Employee*) empleadoA;
+        empB = (Employee*) empleadoB;
+        ret = empA->horasTrabajadas, empB->horasTrabajadas;
+    }
+    return ret;
+}
+
+int employee_sortBySueldo(void* empleadoA, void* empleadoB)
+{
+    int ret;
+    ret = RETURN_ERROR;
+
+    Employee* empA;
+    Employee* empB;
+
+    if(empleadoA != NULL && empleadoB != NULL)
+    {
+        empA = (Employee*) empleadoA;
+        empB = (Employee*) empleadoB;
+        ret = empA->sueldo, empB->sueldo;
+    }
+    return ret;
+}

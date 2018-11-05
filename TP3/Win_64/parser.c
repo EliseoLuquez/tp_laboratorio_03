@@ -80,7 +80,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     int sueldo;
     int line = 0;
 
-    pfile = fopen("data.csv", "rb");
+    pfile = fopen("data.bin", "rb");
 
     if(pfile != NULL)
     {

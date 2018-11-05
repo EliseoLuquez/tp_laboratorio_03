@@ -45,7 +45,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     int ret;
     ret = RETURN_ERROR;
 
-    FILE* pfile = fopen("data.csv", "rb");
+    FILE* pfile = fopen("data.bin", "rb");
     if(pfile != NULL)
     {
         ret = parser_EmployeeFromText(pfile, pArrayListEmployee);
@@ -86,7 +86,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
         scanf("%s", nombre);
         ret = employee_setNombre(emp, nombre);
 
-        printf("Ingrese Horas Trabajafas: ");
+        printf("Ingrese Horas Trabajadas: ");
         scanf("%d", &horasTeabajadas);
         ret = employee_setHorasTrabajadas(emp, horasTeabajadas);
 
@@ -118,7 +118,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     int id = 0;
     int idEdit = 0;
     char nombre[20];
-    int horasTeabajadas = 0;
+    int horasTrabajadas = 0;
     int sueldo = 0;
 
     Employee* empAux = employee_new();
@@ -149,10 +149,10 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                     case 2:
                             printf("Ingrese Horas Trabajadas: ");
                             scanf("%d",empAux->horasTrabajadas);
-                            empAux->horasTrabajadas = horasTeabajadas;
+                            empAux->horasTrabajadas = horasTrabajadas;
                             break;
                     case 3:
-                            printf("Ingrese Horas Trabajadas: ");
+                            printf("Ingrese Sueldo: ");
                             scanf("%d",empAux->sueldo);
                             empAux->sueldo = sueldo;
                             break;
@@ -227,9 +227,6 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
         }
      }
 
-
-
-
     return ret;
 }
 
@@ -245,14 +242,16 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     int ret;
     ret = RETURN_ERROR;
     Employee* emp = employee_new();
+    int len;
+    len = ll_len(pArrayListEmployee);
 
     if(pArrayListEmployee != NULL)
     {
         printf("Id  Nombre  Hs.Trab.  Sueldo\n\n");
-        for(int i = 0; i < ll_len(pArrayListEmployee); i++)
+        for(int i = 0; i < len; i++)
         {
-            emp = (Employee*) ll_get(pArrayListEmployee, i);
-            employee_showEmployee(emp);
+            employee_showEmployees(pArrayListEmployee);
+            break;
         }
      }
      else
@@ -275,28 +274,20 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    Employee* empAux = employee_new();
-    int* len;
-    len = ll_len(pArrayListEmployee);
-
+    int ret;
+    ret = RETURN_ERROR;
     if(pArrayListEmployee != NULL)
     {
-        for(int i = 0; i<len-1; i++)
-        {
-            for(int j = i +1;j < len;j++)
-            {
-                if()
-                {
-                    empAux = len[i];
-                    len[i] = len[j];
-                    len[j] = empAux;
-                }
-            }
-        }
-
-
+        ll_sort(pArrayListEmployee, employee_sortByName, 0);
+        employee_showEmployees(pArrayListEmployee);
     }
-    return 1;
+    else
+    {
+        printf("No hay datos");
+    }
+    system("pause");
+
+    return ret;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).

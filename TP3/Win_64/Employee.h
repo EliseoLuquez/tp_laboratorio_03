@@ -25,6 +25,11 @@ int employee_setSueldo(Employee* this,int sueldo);
 int employee_getSueldo(Employee* this,int* sueldo);
 
 void  employee_showEmployee(Employee* this);
-void  employee_showEmployees(Employee* this, int tam);
+void  employee_showEmployees(Employee* this);
+
+int employee_sortByName(void* empleadoA, void* empleadoB);
+int employee_sortById(void* empleadoA, void* empleadoB);
+int employee_sortByHsTrabajadas(void* empleadoA, void* empleadoB);
+int employee_sortBySueldo(void* empleadoA, void* empleadoB);
 
 #endif // employee_H_INCLUDED
