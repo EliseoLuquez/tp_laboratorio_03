@@ -125,7 +125,8 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee != NULL)
     {
-        printf("Ingrese Id: ");
+        system("cls");
+        printf("\nIngrese Id: ");
         scanf("%d", &idEdit);
 
         for(int i = 0; i < ll_len(pArrayListEmployee); i++)
@@ -140,6 +141,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                     switch(menuEdit())
                     {
                     case 1:
+                            employee_showEmployee(empAux);
                             printf("Ingrese Nombre: ");
                             scanf("%s",empAux->nombre);
                             strcpy(empAux->nombre, nombre);
@@ -273,6 +275,27 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
+    Employee* empAux = employee_new();
+    int* len;
+    len = ll_len(pArrayListEmployee);
+
+    if(pArrayListEmployee != NULL)
+    {
+        for(int i = 0; i<len-1; i++)
+        {
+            for(int j = i +1;j < len;j++)
+            {
+                if()
+                {
+                    empAux = len[i];
+                    len[i] = len[j];
+                    len[j] = empAux;
+                }
+            }
+        }
+
+
+    }
     return 1;
 }
 
@@ -297,6 +320,11 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
+   // int ret;
+    //ret = RETURN_ERROR;
+
+
+
     return 1;
 }
 

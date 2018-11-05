@@ -145,7 +145,7 @@ void  employee_showEmployee(Employee* this)
 {
     if(this != NULL )
     {
-        printf ( " %4d  %s  %5d  %5d \n " , this->id , this->nombre , this->horasTrabajadas , this->sueldo);
+        printf ( " %4d  %s  %d  %d \n " , this->id , this->nombre , this->horasTrabajadas , this->sueldo);
     }
 }
 /**
