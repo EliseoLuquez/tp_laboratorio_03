@@ -86,33 +86,24 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     {
         while(!feof(pFile))
         {
-            ret = fscanf(pFile,"%d,%s,%d,%d\n", &id, nombre, &horasTrabajadas, &sueldo);
-            if(ret == 4 && line > 0)
-            {
+
                 Employee* emp = employee_new();
+                fread(emp, sizeof(Employee*),1,pFile);
                 emp->id = id;
                 strcpy(emp->nombre, nombre);
                 emp->horasTrabajadas = horasTrabajadas;
                 emp->sueldo = sueldo;
                 ll_add(pArrayListEmployee, emp);
                 line++;
-            }
-            else if(line == 0)
-            {
-                line++;
-            }
-            else
-            {
-                break;
-            }
         }
-        fclose(pfile);
-        ret = RETURN_OK;
     }
     else
     {
-        printf("Arvhivo Vacio\n\n");
+        printf("No hay datos");
     }
+
+        fclose(pfile);
+        ret = RETURN_OK;
 
     return ret;
 }

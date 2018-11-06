@@ -20,7 +20,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
     int ret;
     ret = RETURN_ERROR;
 
-    FILE* pfile = fopen("data.csv", "r");
+    FILE* pfile = fopen("datas.csv", "r");
     if(pfile != NULL)
     {
         ret = parser_EmployeeFromText(pfile, pArrayListEmployee);
@@ -278,8 +278,27 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     ret = RETURN_ERROR;
     if(pArrayListEmployee != NULL)
     {
-        ll_sort(pArrayListEmployee, employee_sortByName, 0);
-        employee_showEmployees(pArrayListEmployee);
+        switch(menuSort())
+        {
+        case 1:
+                ll_sort(pArrayListEmployee, employee_sortById,1);
+                employee_showEmployees(pArrayListEmployee);
+                break;
+        case 2:
+                ll_sort(pArrayListEmployee, employee_sortByName,1);
+                employee_showEmployees(pArrayListEmployee);
+                break;
+        case 3:
+                ll_sort(pArrayListEmployee, employee_sortByHsTrabajadas,1);
+                employee_showEmployees(pArrayListEmployee);
+                break;
+        case 4:
+                ll_sort(pArrayListEmployee, employee_sortBySueldo,1);
+                employee_showEmployees(pArrayListEmployee);
+                break;
+        default:
+                break;
+        }
     }
     else
     {
@@ -299,7 +318,27 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+ int ret;
+    ret = RETURN_ERROR;
+    FILE* pfile;
+    pfile = fopen("datas.bin", "wb");
+    Employee* emp;
+
+    if(pArrayListEmployee != NULL)
+    {
+        for(int i = 0; i<ll_len(pArrayListEmployee);i++)
+        {
+            emp = (Employee*)ll_get(pArrayListEmployee, i);
+            fprintf(pfile, "%d,%s,%d,%d",emp->id ,emp->nombre ,emp->horasTrabajadas, emp->suledo);
+        }
+        fclose(pfile);
+    }
+    else
+    {
+        printf("No hay datos");
+    }
+
+    return ret;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
@@ -311,12 +350,21 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
-   // int ret;
-    //ret = RETURN_ERROR;
+    int ret;
+    ret = RETURN_ERROR;
+    FILE* pfile;
+    pfile = fopen("datas.bin", "wb");
+    Employee* emp;
+
+    for(int i = 0; i<ll_len(pArrayListEmployee);i++)
+    {
+        emp = (Employee*)ll_get(pArrayListEmployee, i);
+        fwrite(emp, sizeof(Employee*), 1, pfile);
+    }
+    fclose(pfile);
 
 
-
-    return 1;
+    return ret;
 }
 
 

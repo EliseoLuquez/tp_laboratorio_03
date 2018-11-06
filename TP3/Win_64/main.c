@@ -22,6 +22,7 @@
 *****************************************************/
 int menuPpal();
 int menuEdit();
+int menuSort();
 int main()
 {
     int option = 0;
@@ -101,6 +102,27 @@ int menuEdit()
         printf("     1. Nombre.                    \n");
         printf("     2. Horas Trabajadas.          \n");
         printf("     3. Sueldo                     \n");
+        printf("***********************************\n");
+        scanf("%d", &r);
+    }
+    while(r < 1 || r > 3);
+
+    return r;
+}
+
+int menuSort()
+{
+    int r;
+
+    do
+    {
+        system("cls");
+        printf("***********************************\n");
+        printf("     Seleccione el sort:           \n");
+        printf("     1. Id.                        \n");
+        printf("     2. Nombre.                    \n");
+        printf("     3. Horas Trabajadas.          \n");
+        printf("     4. Sueldo                     \n");
         printf("***********************************\n");
         scanf("%d", &r);
     }
