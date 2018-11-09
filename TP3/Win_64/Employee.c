@@ -146,7 +146,7 @@ void  employee_showEmployee(Employee* this)
 {
     if(this != NULL )
     {
-        printf ( " %4d  %s  %d  %d \n " , this->id , this->nombre , this->horasTrabajadas , this->sueldo);
+        printf ( " %4d  %s  %d  %d \n\n " , this->id , this->nombre , this->horasTrabajadas , this->sueldo);
     }
 }
 
@@ -164,7 +164,7 @@ void  employee_showEmployees(Employee* this)
     }
     else
     {
-        printf("No hay empleados cargados");
+        printf("No hay empleados cargados\n\n");
     }
 
 }

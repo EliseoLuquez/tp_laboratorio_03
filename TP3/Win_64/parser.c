@@ -18,21 +18,22 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
     int ret;
     ret = RETURN_ERROR;
     FILE* pfile;
-
-    char id[5];
+    int cant;
+    char id[6];
     char nombre[20];
-    char horasTrabajadas[5];
-    char sueldo[5];
-    int line = 0;
-
-    pfile = fopen("data.csv", "r");
+    char horasTrabajadas[6];
+    char sueldo[6];
 
     if(pfile != NULL)
     {
         while(!feof(pFile))
         {
-            ret = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n],%[^,]\n", id, nombre, horasTrabajadas, sueldo);
-            if(ret == 4 && line > 0)
+            ret = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,\n]\n", id, nombre, horasTrabajadas, sueldo);
+            if(cant != 4)
+            {
+                printf("Error al cargar Arvhivo \n\n");
+            }
+            else
             {
                 Employee* emp = employee_new();
                 emp->id = atoi(id);
@@ -40,23 +41,15 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
                 emp->horasTrabajadas = atoi(horasTrabajadas);
                 emp->sueldo = atoi(sueldo);
                 ll_add(pArrayListEmployee, emp);
-                line++;
+                system("pause");
             }
-            else if(line == 0)
-            {
-                line++;
-            }
-            else
-            {
-                break;
-            }
-        }
         fclose(pfile);
-        ret = RETURN_OK;
+        RETURN_OK;
+        }
     }
     else
     {
-        printf("Arvhivo Vacio\n\n");
+        printf("Arvhivo hay datos\n\n");
     }
 
     return ret;
@@ -74,13 +67,6 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     int ret;
     ret = RETURN_ERROR;
     FILE* pfile;
-    int id;
-    char nombre[20];
-    int horasTrabajadas;
-    int sueldo;
-    int line = 0;
-
-    pfile = fopen("data.bin", "rb");
 
     if(pfile != NULL)
     {
@@ -88,22 +74,17 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
         {
 
                 Employee* emp = employee_new();
-                fread(emp, sizeof(Employee*),1,pFile);
-                emp->id = id;
-                strcpy(emp->nombre, nombre);
-                emp->horasTrabajadas = horasTrabajadas;
-                emp->sueldo = sueldo;
+                ret = fread(emp, sizeof(Employee),1,pFile);
                 ll_add(pArrayListEmployee, emp);
-                line++;
+                ret = RETURN_OK;
+
         }
     }
     else
     {
         printf("No hay datos");
     }
-
-        fclose(pfile);
-        ret = RETURN_OK;
+    fclose(pfile);
 
     return ret;
 }

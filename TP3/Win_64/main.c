@@ -27,6 +27,7 @@ int main()
 {
     int option = 0;
     LinkedList* listaEmpleados = ll_newLinkedList();
+    //ll_clear(listaEmpleados);
 
     do{
         option = menuPpal();
@@ -57,7 +58,7 @@ int main()
                 controller_saveAsText("data.csv", listaEmpleados);
                 break;
             case 9:
-                controller_saveAsBinary("data.csv", listaEmpleados);
+                controller_saveAsBinary("data.bin", listaEmpleados);
                 break;
         }
     }while(option != 10);
@@ -70,19 +71,19 @@ int menuPpal()
     do
     {
         system("cls");
-        printf("***********************************************************************************\n");
-        printf("    Menu:                                                                          \n");
-        printf("    1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).   \n");
-        printf("    2. Cargar los datos de los empleados desde el archivo data.csv (modo binario). \n");
-        printf("    3. Alta de empleado                                                            \n");
-        printf("    4. Modificar datos de empleado                                                 \n");
-        printf("    5. Baja de empleado                                                            \n");
-        printf("    6. Listar empleados                                                            \n");
-        printf("    7. Ordenar empleados                                                           \n");
-        printf("    8. Guardar los datos de los empleados en el archivo data.csv (modo texto).     \n");
-        printf("    9. Guardar los datos de los empleados en el archivo data.csv (modo binario).   \n");
-        printf("   10. Salir                                                                       \n");
-        printf("***********************************************************************************\n");
+        printf(" \n");
+        printf("  Menu:                                                                          \n");
+        printf("  1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).   \n");
+        printf("  2. Cargar los datos de los empleados desde el archivo data.csv (modo binario). \n");
+        printf("  3. Alta de empleado                                                            \n");
+        printf("  4. Modificar datos de empleado                                                 \n");
+        printf("  5. Baja de empleado                                                            \n");
+        printf("  6. Listar empleados                                                            \n");
+        printf("  7. Ordenar empleados                                                           \n");
+        printf("  8. Guardar los datos de los empleados en el archivo data.csv (modo texto).     \n");
+        printf("  9. Guardar los datos de los empleados en el archivo data.bin (modo binario).   \n");
+        printf(" 10. Salir                                                                       \n");
+        printf(" \n");
         scanf("%d", &r);
     }
     while(r < 1 || r > 10);
@@ -102,10 +103,11 @@ int menuEdit()
         printf("     1. Nombre.                    \n");
         printf("     2. Horas Trabajadas.          \n");
         printf("     3. Sueldo                     \n");
+        printf("     4. Salir                      \n");
         printf("***********************************\n");
         scanf("%d", &r);
     }
-    while(r < 1 || r > 3);
+    while(r < 1 || r > 4);
 
     return r;
 }
@@ -123,10 +125,11 @@ int menuSort()
         printf("     2. Nombre.                    \n");
         printf("     3. Horas Trabajadas.          \n");
         printf("     4. Sueldo                     \n");
+        printf("     5. Salir                      \n");
         printf("***********************************\n");
         scanf("%d", &r);
     }
-    while(r < 1 || r > 3);
+    while(r < 1 || r > 5);
 
     return r;
 }
